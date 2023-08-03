@@ -5,7 +5,7 @@ from typing import Tuple
 import datetime
 import gym
 import numpy as np
-import tqdm
+from tqdm import tqdm
 import time
 import absl
 import sys
