@@ -39,12 +39,13 @@ def _update_jit(
         value = new_value
     new_target_actor, target_actor_info = awr_update_actor(key, target_actor, target_critic,
                                              new_value, batch, temperature_target, double)
-    new_actor, actor_info = update_evaluation_policy(key, target_actor, target_critic,
-                                             new_value, batch, temperature, double)
 
     new_critic, critic_info = update_q(critic, new_value, batch, discount, double, key, loss_temp, args)
 
     new_target_critic = target_update(new_critic, target_critic, tau)
+
+    new_actor, actor_info = update_evaluation_policy(key, target_actor, target_critic,
+                                            new_value, batch, temperature, double)
 
     return rng, new_actor, new_target_actor, new_critic, new_value, new_target_critic, {
         **critic_info,
