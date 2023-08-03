@@ -158,7 +158,7 @@ def main(_):
 
     best_eval_returns = -np.inf
     eval_returns = []
-    for i in range(1, FLAGS.max_steps + 1): # Remove TQDM
+    for i in tqdm(range(1, FLAGS.max_steps + 1)): # Remove TQDM
         batch = dataset.sample(FLAGS.batch_size)
 
         update_info = agent.update(batch)
