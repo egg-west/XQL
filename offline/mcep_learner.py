@@ -44,7 +44,7 @@ def _update_jit(
 
     new_target_critic = target_update(new_critic, target_critic, tau)
 
-    new_actor, actor_info = update_evaluation_policy(key, target_actor, target_critic,
+    new_actor, actor_info = update_evaluation_policy(key, actor, target_critic,
                                             new_value, batch, temperature, double)
 
     return rng, new_actor, new_target_actor, new_critic, new_value, new_target_critic, {
@@ -119,7 +119,6 @@ class MCEPLearner(object):
                              tx=optimiser)
 
         critic_def = value_net.DoubleCritic(hidden_dims)
-
         critic = Model.create(critic_def,
                               inputs=[critic_key, observations, actions],
                               tx=optax.adam(learning_rate=critic_lr))
