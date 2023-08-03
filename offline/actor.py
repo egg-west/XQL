@@ -76,7 +76,7 @@ def update_evaluation_policy(key: PRNGKey, actor: Model, critic: Model, value: M
         #actor_loss = -(exp_a * log_probs).mean()
         actor_loss = (-q - temperature * log_probs).mean()
 
-        return actor_loss, {'evaluation_actor_loss': actor_loss, 'evaluation_adv': q - v}
+        return actor_loss, {'evaluation_actor_loss': actor_loss, 'evaluation_q': q}
 
     new_actor, info = actor.apply_gradient(actor_loss_fn)
     #"""
