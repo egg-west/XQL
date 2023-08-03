@@ -42,7 +42,7 @@ flags.DEFINE_float('max_clip', 7., 'Loss clip value')
 flags.DEFINE_integer('num_v_updates', 1, 'Number of value updates per iter')
 flags.DEFINE_boolean('log_loss', False, 'Use log gumbel loss')
 
-flags.DEFINE_boolean('beta', 2.0, 'beta')
+flags.DEFINE_float('beta', 2.0, 'beta')
 
 flags.DEFINE_boolean('noise', False, 'Add noise to actions')
 flags.DEFINE_float('noise_std', 0.1, 'Noise std for actions')
