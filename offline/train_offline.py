@@ -116,7 +116,7 @@ def make_env_and_dataset(env_name: str,
 
 def main(_):
     # tags = FLAGS.save_dir.split('/')[-1]
-    wandb.init(project=FLAGS.env_name+'_reproduce', sync_tensorboard=True,
+    wandb.init(project=FLAGS.env_name+'_ext_'+str(FLAGS.seed), sync_tensorboard=True,
                reinit=True, settings=wandb.Settings(_disable_stats=True))
     wandb.config.update(flags.FLAGS)
 
