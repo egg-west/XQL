@@ -64,7 +64,8 @@ def update_evaluation_policy(key: PRNGKey, actor: Model, critic: Model, value: M
                            batch.observations,
                            training=True,
                            rngs={'dropout': key})
-        actions, _ = dist.sample_and_log_prob(seed=key)
+        #actions, _ = dist.sample_and_log_prob(seed=key)
+        actions = dist.sample(seed=key)
         log_probs = dist.log_prob(batch.actions)
 
         q1, q2 = critic(batch.observations, actions)
