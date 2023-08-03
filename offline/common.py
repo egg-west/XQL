@@ -90,7 +90,7 @@ class Model:
                inputs: Sequence[jnp.ndarray],
                tx: Optional[optax.GradientTransformation] = None) -> 'Model':
         variables = model_def.init(*inputs)
-
+        print(f"{variables=}")
         _, params = variables.pop('params')
 
         if tx is not None:
