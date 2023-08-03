@@ -154,7 +154,7 @@ class MCEPLearner(object):
     def update(self, batch: Batch) -> InfoDict:
         new_rng, new_actor, new_target_actor, new_critic, new_value, new_target_critic, info = _update_jit(
             self.rng, self.actor, self.critic, self.value, self.target_critic,
-            batch, self.discount, self.tau, self.expectile, self.temperature, self.self.temperature_target, self.loss_temp, self.double_q, self.vanilla, self.args)
+            batch, self.discount, self.tau, self.expectile, self.temperature, self.temperature_target, self.loss_temp, self.double_q, self.vanilla, self.args)
 
         self.rng = new_rng
         self.actor = new_actor
