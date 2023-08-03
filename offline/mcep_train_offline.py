@@ -17,7 +17,7 @@ from dataclasses import dataclass
 import wrappers
 from dataset_utils import D4RLDataset, split_into_trajectories
 from evaluation import evaluate
-from learner import Learner
+from mcep_learner import MCEPLearner
 import wandb
 import warnings
 
@@ -42,7 +42,8 @@ flags.DEFINE_float('max_clip', 7., 'Loss clip value')
 flags.DEFINE_integer('num_v_updates', 1, 'Number of value updates per iter')
 flags.DEFINE_boolean('log_loss', False, 'Use log gumbel loss')
 
-flags.DEFINE_boolean('beta', 2.0, 'beta')
+flags.DEFINE_boolean('beta', 1.0, 'beta for evaluation policy')
+flags.DEFINE_boolean('beta_target', 1.0, 'beta for target policy')
 
 flags.DEFINE_boolean('noise', False, 'Add noise to actions')
 flags.DEFINE_float('noise_std', 0.1, 'Noise std for actions')
@@ -148,7 +149,7 @@ def main(_):
                       num_v_updates=FLAGS.num_v_updates,
                       log_loss=FLAGS.log_loss,
                       noise_std=FLAGS.noise_std)
-    agent = Learner(FLAGS.seed,
+    agent = MCEPLearner(FLAGS.seed,
                     env.observation_space.sample()[np.newaxis],
                     env.action_space.sample()[np.newaxis],
                     max_steps=FLAGS.max_steps,
@@ -156,6 +157,7 @@ def main(_):
                     double_q=FLAGS.double,
                     vanilla=False,
                     temperature=FLAGS.beta,
+                    temperature_target=FLAGS.beta_target,
                     args=args,
                     **kwargs)
 
